@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom"
 import { FaUser } from "react-icons/fa";
-import { fetchAllUsers } from "../../sanity/services/userServices";
 
-export default function Login() {
 
-    const [user, setUser] = useState(null)
+export default function Login({setLoggedIn, user, setUser}) {
 
-    const getAllUsers = async () => {
-        const data = await fetchAllUsers()
-        setUser(data)
+
+    const handlLogIn = () => {
+        setLoggedIn(true)
+        
     }
-
-    useEffect(() => {
-        getAllUsers()
-    }, [])
-
     console.log(user)
     return (
         <>
@@ -23,7 +17,7 @@ export default function Login() {
             <section className="users">
                 {user?.map((item, idx) => {
                     return (
-                        <Link key={idx} >
+                        <Link key={idx} onClick={handlLogIn}>
                             <FaUser /> {item.username}
                         </Link>
                     );
