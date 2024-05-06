@@ -1,6 +1,8 @@
 import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { useNavigate, Link } from 'react-router-dom';
+import { FaUserCircle } from "react-icons/fa";
+import { FaDisplay } from "react-icons/fa6";
 
 export default function Header() {
    const { loggedIn, loggedInUser, setLoggedIn, setLoggedInUser } = useUser(); // Bruk hooken for å få tilgang til den globale tilstanden
@@ -27,7 +29,7 @@ export default function Header() {
                <ul>
                   <li className="menuItems">
                      <Link to={"/watch"}>
-                        Hva skal jeg se?
+                        <FaDisplay /> Hva skal jeg se?
                      </Link>
                   </li>
                   <li className="menuItems">
@@ -36,7 +38,7 @@ export default function Header() {
                      </Link>
                   </li>
                   <li className="menuItems">
-                     {loggedInUser} <button onClick={handleLogOut}>Logg ut</button>
+                     <FaUserCircle /> {loggedInUser} <button onClick={handleLogOut}>Logg ut</button>
                   </li>
                </ul>
             )}

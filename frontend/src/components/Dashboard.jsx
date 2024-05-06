@@ -1,5 +1,6 @@
 import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
+import { FaSmileWink } from "react-icons/fa";
 
 function Dashboard() {
   // Bruk useUser-hooken for å få tilgang til den globale tilstanden
@@ -10,14 +11,14 @@ function Dashboard() {
   if (loggedInUser) {
     return (
       <>
-        <div>Dashboard</div>
+        <h2>Hei, {loggedInUser} <FaSmileWink /> </h2>
       </>
     );
   } else {
     // Hvis brukeren ikke er logget inn, vis feilmelding
     return (
       <>
-        <div>Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</div>
+        <h2>Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</h2>
       </>
     );
   }
