@@ -1,39 +1,46 @@
-import React from 'react'
-
-import { FaUserCircle } from "react-icons/fa";
-import { FaDisplay } from "react-icons/fa6";
+import React from 'react';
+import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Header() {
-   
-   
-  return (
-     <>
-        {/* 
-            TODO:
-            - add Link tag to li-items in order to navigate to chosen
-               component
-            - change <a> tag with Link tag for the logo to navigate it to the 
-            home page component
-        */}
+   const { loggedIn, loggedInUser, setLoggedIn, setLoggedInUser } = useUser(); // Bruk hooken for å få tilgang til den globale tilstanden
+
+   const navigate = useNavigate();
+
+   const handleLogOut = () => {
+      localStorage.removeItem('loggedInUser');
+      setLoggedInUser(null);
+      setLoggedIn(false);
+      navigate("/");
+   };
+
+   return (
       <header>
          <nav>
-            <h1><a href='#'>What To See?</a></h1>
-            <ul>
-               <li className="menuItems"> <FaDisplay /> Hva skal jeg se?</li>
-               <li className="menuItems">Bla gjennom sjangere</li>
-               <li className="menuItems"> <FaUserCircle />Bruker</li>
-            </ul>
-           </nav>
+            <h1>
+               <Link to={"/"}>
+                  What To See?
+               </Link>
+            </h1>
 
-           {/* Dashbord component goes here after login */}
-
+            {loggedIn && (
+               <ul>
+                  <li className="menuItems">
+                     <Link to={"/watch"}>
+                        Hva skal jeg se?
+                     </Link>
+                  </li>
+                  <li className="menuItems">
+                     <Link to={"/genre"}>
+                        Bla gjennom sjangere
+                     </Link>
+                  </li>
+                  <li className="menuItems">
+                     {loggedInUser} <button onClick={handleLogOut}>Logg ut</button>
+                  </li>
+               </ul>
+            )}
+         </nav>
       </header>
-   </>
-  )
+   );
 }
-
-/*
-   TODO:
-   - in order to view meny items add a className when if the user is logged in or not
-   if loggedIn -> add custom className to navbar lists (ul) 
-   */
