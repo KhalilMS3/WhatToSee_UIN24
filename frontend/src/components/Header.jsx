@@ -3,7 +3,7 @@ import React from 'react'
 import { FaUserCircle } from "react-icons/fa";
 import { FaDisplay } from "react-icons/fa6";
 
-export default function Nav() {
+export default function Header() {
   return (
      <>
         {/* 
@@ -15,14 +15,22 @@ export default function Nav() {
         */}
       <header>
          <nav>
-            <a href='#'>What To See?</a>
-            <ul>
+            <h1><a href='#'>What To See?</a></h1>
+            <ul >
                <li className="menuItems"> <FaDisplay /> Hva skal jeg se?</li>
                <li className="menuItems">Bla gjennom sjangere</li>
                <li className="menuItems"> <FaUserCircle/> Bruker</li>
             </ul>
-         </nav>
+           </nav>
+
+           {/* Dashbord component goes here after login */}
+
       </header>
    </>
   )
 }
+
+/*
+   TODO:
+   - in order to view meny items add a className when if the user is logged in or not
+*/

@@ -1,4 +1,5 @@
 @import 'nav';
+@import 'login';
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
 
@@ -8,10 +9,15 @@ $background-color: #FDF4F3;
 $font: 'Rubik', sans-serif;
 $bold-500: 500;
 $bold-700: 700;
+$max-width: 1200px;
+
+/* Fixed text styles */
+h2{font-size: 3rem; color: $primary-color}
 
 body {
    font-family: $font;
    margin: 0;
    padding: 0;
+   background-color: $background-color;
 }
 

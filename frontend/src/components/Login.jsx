@@ -1,23 +1,32 @@
 import React from "react";
+import { Link } from "react-router-dom"
+import { FaUser } from "react-icons/fa";
 
-export default function Login({ setLogedIn, users }) {
-    const handleLogin = (username) => {
-        setLogedIn(username);
-        localStorage.setItem("logedIn", username);
-    };
-
+export default function Login() {
+    // const handleLogin = (username) => {
+    //     setLogedIn(username);
+    //     localStorage.setItem("logedIn", username);
+    // };
+    const users = [
+    {
+        username: "Khalil"
+    },
+    {
+        username: "Odai"
+    }   
+    ]
     return (
         <>
-            <h1>Velg bruker:</h1>
-            <div className="user-buttons">
-                {users.map((user) => {
+            <h2>Hei, hvem ser på?</h2>
+            <section className="users">
+                {users?.map(user => {
                     return (
-                        <button key={user.username} onClick={() => handleLogin(user.username)}>
-                            {user.username}
-                        </button>
+                        <Link key={user.username} >
+                            <FaUser /> {user.username}
+                        </Link>
                     );
                 })}
-            </div>
+            </section>
         </>
     );
 }
