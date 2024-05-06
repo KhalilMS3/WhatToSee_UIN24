@@ -16,7 +16,7 @@ export default function Header() {
       <header>
          <nav>
             <h1><a href='#'>What To See?</a></h1>
-            <ul >
+            <ul>
                <li className="menuItems"> <FaDisplay /> Hva skal jeg se?</li>
                <li className="menuItems">Bla gjennom sjangere</li>
                <li className="menuItems"> <FaUserCircle/> Bruker</li>
@@ -33,4 +33,5 @@ export default function Header() {
 /*
    TODO:
    - in order to view meny items add a className when if the user is logged in or not
-*/
+   if loggedIn -> add custom className to navbar lists (ul) 
+   */
