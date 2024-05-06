@@ -1,6 +1,6 @@
 export const users = {
-  title: 'Bruker',
-  name: 'user',
+  title: 'Brukere',
+  name: 'users',
   type: 'document',
   fields: [
     {
