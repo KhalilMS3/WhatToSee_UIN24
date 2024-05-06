@@ -1,0 +1,17 @@
+@import 'nav';
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
+
+$primary-color: #DF5549;
+$secondary-color: #772C25;
+$background-color: #FDF4F3;
+$font: 'Rubik', sans-serif;
+$bold-500: 500;
+$bold-700: 700;
+
+body {
+   font-family: $font;
+   margin: 0;
+   padding: 0;
+}
+
