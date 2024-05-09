@@ -1,9 +1,12 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
 import './Styles/main.scss';
+
+import Layout from './components/Layout';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Home from './components/Home';
+
+import { Routes, Route } from 'react-router-dom';
 import { UserProvider } from './hooks/UserContext';
 
 
@@ -13,9 +16,14 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Layout>
+      <footer>
+        <p>What To See? © 2024 </p>
+        <p>Developed By: Khalil Sfouk & Odai Alissa</p>
+      </footer>
     </UserProvider>
   );
 }

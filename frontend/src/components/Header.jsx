@@ -3,6 +3,7 @@ import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUserCircle } from "react-icons/fa";
 import { FaDisplay } from "react-icons/fa6";
+import { BiSolidCameraMovie } from "react-icons/bi";
 
 export default function Header() {
    const { loggedIn, loggedInUser, setLoggedIn, setLoggedInUser } = useUser(); // Bruk hooken for å få tilgang til den globale tilstanden
@@ -20,24 +21,23 @@ export default function Header() {
       <header>
          <nav>
             <h1>
-               <Link to={"/"}>
+               <Link to={"/home"}>
                   What To See?
                </Link>
             </h1>
-
             {loggedIn && (
                <ul>
-                  <li className="menuItems">
-                     <Link to={"/watch"}>
+                  <li className="menuItem">
+                     <Link to={"/home"}>
                         <FaDisplay /> Hva skal jeg se?
                      </Link>
                   </li>
-                  <li className="menuItems">
+                  <li className="menuItem">
                      <Link to={"/genre"}>
-                        Bla gjennom sjangere
+                        <BiSolidCameraMovie/> Bla gjennom sjangere
                      </Link>
                   </li>
-                  <li className="menuItems">
+                  <li className="menuItem">
                      <FaUserCircle /> {loggedInUser} <button onClick={handleLogOut}>Logg ut</button>
                   </li>
                </ul>

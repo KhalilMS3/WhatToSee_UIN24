@@ -1,6 +1,7 @@
 @import 'nav';
 @import 'login';
-@import 'dashboard';
+@import 'designelements';
+@import 'moviecard';
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
 
@@ -14,11 +15,14 @@ $bold-700: 700;
 $max-width: 1200px;
 
 /*FIXED TEXT STYLES*/
-h2 {
+h2, h3, h4, h5{
    padding: 10px 20px;
-   font-size: 3rem;
    color: $primary-color;
-   }
+}
+h2 {font-size: 2.5rem;}
+h3, h4, h5 {font-size: 2rem;}
+
+
 
 body {
    margin: 0;
@@ -27,4 +31,13 @@ body {
    background-color: $background-color;
 }
 
+footer{
+   width: 100%;
+   text-align: center;
+   margin-top: 2rem;
+   p{
+      color: $primary-color;
+      font-weight: $bold-500;
+   }
+}
 

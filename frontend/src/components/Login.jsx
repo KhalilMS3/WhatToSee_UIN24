@@ -13,6 +13,7 @@ export default function Login() {
 
   return (
     <>
+        <h2>Hei, hvem ser på?</h2>
         <UserList user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} handleLogIn={handleLogIn} />
     </>
   );

@@ -33,7 +33,7 @@ nav{
       padding: 0;
       list-style: none;
       
-         .menuItems{
+         .menuItem{
                display: flex;
                align-items: center;
                font-weight: $bold-500;
@@ -62,11 +62,11 @@ nav{
                margin-right: .3rem;
             }
          }
-         .menuItems:first-child{
+         .menuItem:first-child{
             background-color: $secondary-color;
             border-radius: .4rem;
          }
-         .menuItems:last-child {
+         .menuItem:last-child {
             border-left: 2px dashed $light-color;
             padding-left: 1.5rem;
          }
