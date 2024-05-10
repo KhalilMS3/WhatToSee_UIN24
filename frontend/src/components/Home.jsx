@@ -1,9 +1,9 @@
 import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
-import { FaSmileWink, FaStar, FaHeart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { FaSmileWink, FaStar, FaHeart, FaSadTear } from "react-icons/fa";
 import WishlistSearchResult from './WishlistSearchResult';
 import FavoriteListSearchResult from './FavoriteListSearchResult';
-import { Link } from 'react-router-dom';
 
 
 export default function Home() {
@@ -46,8 +46,13 @@ if (loggedInUser) {
     // Hvis brukeren ikke er logget inn, vis feilmelding
    return (
       <>
-      <main>
-         <p>Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</p>
+         <main>
+            <section className='login-err-msg'>
+               <h2 className='oops'>Ooops ! <FaSadTear /></h2>
+               <p className='error-msg'>403 - Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</p>
+               <Link to={"/"}>Logg inn</Link>
+            </section>
+
       </main>
       </>
    );

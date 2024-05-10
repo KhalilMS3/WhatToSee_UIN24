@@ -1,8 +1,10 @@
 import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
+import { Link } from 'react-router-dom';
 import WishlistSearchResult from './WishlistSearchResult';
 import FavoriteListSearchResult from './FavoriteListSearchResult';
-import { Link } from 'react-router-dom';
+import { FaSadTear } from "react-icons/fa";
+
 
 
 export default function Dashboard() {
@@ -56,7 +58,12 @@ export default function Dashboard() {
     return (
       <>
         <main>
-          <p>Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</p>
+          <section className='login-err-msg'>
+               <h2 className='oops'>Ooops ! <FaSadTear /></h2>
+               <p className='error-msg'>403 - Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</p>
+               <Link to={"/"}>Logg inn</Link>
+            </section>
+
         </main>
       </>
     );
