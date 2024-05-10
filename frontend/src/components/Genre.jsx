@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Genre() {
-
+    const [genres, setGenres] = useState([])
+    
 const getGenre = async()=>{
 
-    const url = 'https://moviesdatabase.p.rapidapi.com/titles/utils/genres?limit=10';
+    const url = 'https://moviesdatabase.p.rapidapi.com/titles/utils/genres';
     const options = {
         method: 'GET',
         headers: {
@@ -15,14 +16,25 @@ const getGenre = async()=>{
 
     try {
         const response = await fetch(url, options);
-        const result = await response.json();
-        console.log(result);
+        const data = await response.json();
+        setGenres(data.results)
     } catch (error) {
         console.error(error);
     }
-}
-useEffect(()=>{getGenre()},[])
+    }
+    useEffect(() => {
+        getGenre()
+    }, [])
+    
+    console.log("Genre", genres)
     return (
-        <div>genre</div>
+        <section>
+            <ul>
+
+            {genres?.map((item, idx) => {
+              return item !== null ?  <li key={idx}>{item}</li> : null
+            })}
+            </ul>
+        </section>
     )
 }

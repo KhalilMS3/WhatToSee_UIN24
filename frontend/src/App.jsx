@@ -8,7 +8,7 @@ import Home from './components/Home';
 
 import { Routes, Route } from 'react-router-dom';
 import { UserProvider } from './hooks/UserContext';
-import Genre from './components/genre';
+import Genre from './components/Genre';
 
 
 function App() {
