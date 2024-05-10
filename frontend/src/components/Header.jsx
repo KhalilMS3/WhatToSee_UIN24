@@ -22,7 +22,7 @@ export default function Header() {
          <nav>
             <h1>
                <Link to={"/home"}>
-                  What To See?
+                  What To Seee?
                </Link>
             </h1>
             {loggedIn && (
