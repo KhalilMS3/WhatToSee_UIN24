@@ -8,6 +8,7 @@ import Home from './components/Home';
 
 import { Routes, Route } from 'react-router-dom';
 import { UserProvider } from './hooks/UserContext';
+import Genre from './components/genre';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/genre" element={<Genre />} />
         </Routes>
       </Layout>
       <footer>
