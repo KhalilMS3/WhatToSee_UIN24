@@ -3,11 +3,15 @@ import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 
 export default function Login() {
-  const { loggedIn, setLoggedInUser, user, setLoggedIn } = useUser();
+  const { loggedIn, setLoggedInUser, user, setLoggedIn, userId, setUserId } = useUser();
 
-  const handleLogIn = (username) => {
+  const handleLogIn = (username, userId) => {
     localStorage.setItem('loggedInUser', username);
     setLoggedInUser(username);
+    localStorage.setItem('userId', userId);
+    setUserId(userId);
+
+
     setLoggedIn(true);
   };
 

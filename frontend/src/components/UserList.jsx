@@ -8,7 +8,7 @@ export default function UserList({ user, handleLogIn }) {
       <section className="users">
         {user?.map((item, idx) => {
           return (
-            <Link to={"/home"} key={idx} onClick={() => handleLogIn(item.username)}>
+            <Link to={"/home"} key={idx} onClick={() => handleLogIn(item.username, item._id)}>
               <FaUser /> {item.username}
             </Link>
           );

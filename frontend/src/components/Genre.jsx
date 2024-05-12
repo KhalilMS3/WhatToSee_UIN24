@@ -2,12 +2,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useUser } from '../hooks/UserContext'; 
 import { writeClient } from '../../sanity/client';
 
-export default function Genre() {
+export default function Genre({user}) {
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { loggedInUser } = useUser(); 
+    const { loggedInUser, userId } = useUser();
+    
 
+    
     useEffect(() => {
         fetchGenres();
     }, []);
@@ -35,6 +37,9 @@ export default function Genre() {
         setLoading(false);
     };
 
+
+
+
     const toggleFavorite = async (genreName) => {
         const isFavorite = genres.find(genre => genre.name === genreName).isFavorite;
         const updatedGenres = genres.map(genre => {
@@ -51,7 +56,7 @@ export default function Genre() {
         if (isFavorite) {
             const doc = {
                 _type: 'favoriteGenres',
-                user: {_type: 'reference', _ref: loggedInUser._id},
+                user: {_type: 'reference', _ref: userId },
                 genre: genreName
             };
             try {
@@ -61,8 +66,8 @@ export default function Genre() {
                 console.error('Error adding genre to favorites:', error);
             }
         } else {
-            const query = `*[_type == "favoriteGenres" && user._ref == $userId && genre == $genreName]`;
-            const params = { userId: loggedInUser._id, genreName };
+            const query = `*[_type == "favoriteGenres" && user._ref == $user_id && genre == $genreName]`;
+            const params = { userId: userId, genreName };
             try {
                 const results = await writeClient.fetch(query, params);
                 results.forEach(async doc => {
