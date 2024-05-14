@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useUser } from '../hooks/UserContext'; 
 import { writeClient } from '../../sanity/client';
-import '../Styles/GenreList.css'
+import { FaStar } from "react-icons/fa";
+
 //apikey: d2ca980ddcmsh43b9d3e642be0a8p1d08c1jsne846de12bbc5
 
 export default function Genre({user}) {
@@ -110,17 +111,27 @@ export default function Genre({user}) {
     
 
     return (
+        <>
+        <h2>Sjangere</h2>
         <section>
             <ul className="genre-list">
-                {genres.map((genre, idx) => (
+                {genres?.map((genre, idx) => {
+                    return genre.name !== null ?
                     <li key={idx} className="genre-item">
                         {genre.name}
-                        <button onClick={() => toggleFavorite(genre.name)}>
-                            {genre.isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-                        </button>
-                    </li>
-                ))}
+                        {genre.isFavorite ? 
+                            <button className='add-btn' onClick={() => toggleFavorite(genre.name)}>
+                                <FaStar/> Remove from favorite
+                            </button>    
+                            :
+                            <button className='remove-btn' onClick={() => toggleFavorite(genre.name)}>
+                                <FaStar/> Add to favorite
+                            </button> 
+                    }
+                    </li> : null
+                })}
             </ul>
         </section>
+                </>
     );
 }
