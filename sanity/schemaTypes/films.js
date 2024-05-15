@@ -11,7 +11,7 @@ export const films = {
       {
          title: "Filmposter",
          name: "poster",
-         type: "image"
+         type: "url"
       },
       {
          title: "imdbid",

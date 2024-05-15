@@ -2,8 +2,9 @@
 export const favoriteGenres = {
     title: 'Favorite Genres',
     name: 'favoriteGenres',
-    type: 'document',
-    fields: [
+    type: 'object',
+  fields: [
+    // user field must be deleted, remain with only the name of genre
       {
         title: 'User',
         name: 'user',
