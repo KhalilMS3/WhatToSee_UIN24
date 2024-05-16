@@ -10,15 +10,21 @@ export const users = {
     },
     {
       title: 'Favoritt filmer',
-      name: 'favoredFilms',
+      name: 'favoredMovies',
       type: 'array',
-      of: [{type: 'films'}],
+      of: [{type: 'reference', to: [{type: 'movies'}]}],
+    },
+    {
+      title: 'Ønskeliste av filmer',
+      name: 'wishlistedMovies',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'movies'}]}],
     },
     {
       title: 'Favoritt sjangere',
       name: 'favoredGenres',
       type: 'array',
-      of: [{type: 'favoriteGenres'}],
+      of: [{ type: 'reference', to: [{ type: 'favoriteGenres' }]}],
     },
   ],
 }

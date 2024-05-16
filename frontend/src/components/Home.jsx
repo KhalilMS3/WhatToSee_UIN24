@@ -25,17 +25,13 @@ if (loggedInUser) {
          </section>
          <section className="movieLists-section">
                <section className="favorite-list">
-                  <h4> <FaStar /> Filmer jeg skal se</h4>
-                  <section className="movie-cards-section">
+                  <h4> <FaStar /> Ditt favorittliste</h4>
                      <FavoriteListSearchResult />
-                  </section>
                </section>
                <span className='divider'></span>
                <section className="wish-list">
                   <h4> <FaHeart /> Ditt ønskeliste</h4>
-                  <section className="movie-cards-section">
                      <WishlistSearchResult/>
-                  </section>
                </section>
          </section>
       </main>

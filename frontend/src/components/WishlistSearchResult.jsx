@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MovieCard from './MovieCard'
+import { useUser } from '../hooks/UserContext'
+import { fetchWishListedMovies } from '../../sanity/services/movieServices'
 
 export default function WishlistSearchResult() {
+  const { loggedInUser } = useUser()
+  const [movies, setMovies] = useState([])
+
+  const getWishlistedMovies = async(loggedInUser) => {
+    const data = await fetchWishListedMovies(loggedInUser)
+    setMovies(data)
+  }
+  useEffect(() => {
+    getWishlistedMovies(loggedInUser)
+  }, [loggedInUser])
+  
   return (
     
-     //   TODO: map throw results from the wishlist of the user and send ti to the movieCard
-     <MovieCard />
+    <section className="movie-card-section">
+      {
+        movies?.map(movie => (
+          movie?.wishlistedMovies?.map((wlMovie, idx) => (
+            
+            <MovieCard
+              key={idx}
+              movietitle={wlMovie.movietitle}
+              poster={wlMovie.poster}
+              IMDBid={wlMovie.IMDBid}
+              genres={wlMovie.genres}
+            />
+          ))
+        ))
+      }
+    </section>
   )
 }

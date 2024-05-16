@@ -1,20 +1,13 @@
 import React from 'react'
 
-export default function MovieCard() {
+export default function MovieCard({idx, movietitle, poster, IMDBid, genres}) {
   return (
     <>
-     <article className="movie-card">
-        <img src="../src/assets/poster.svg" alt="movie poster" />
-        <a href="#">Spider Man: No way home</a>
+     <article key={idx} className="movie-card">
+        <img src={poster} alt={movietitle} />
+        <a href={`https://www.imdb.com/title/${IMDBid}/`}>{movietitle}</a>
     </article>
-     <article className="movie-card">
-        <img src="../src/assets/poster.svg" alt="movie poster" />
-        <a href="#">Spider Man: No way home</a>
-    </article>
-     <article className="movie-card">
-        <img src="../src/assets/poster.svg" alt="movie poster" />
-        <a href="#">Spider Man: No way home</a>
-    </article>
+    
     </>
   )
 }
