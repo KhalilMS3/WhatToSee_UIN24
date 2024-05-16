@@ -9,7 +9,7 @@ import { FaSadTear } from "react-icons/fa";
 
 export default function Dashboard() {
   // Bruk useUser-hooken for å få tilgang til den globale tilstanden
-  const { loggedInUser } = useUser();
+  const { loggedInUser, friend, friendId} = useUser();
 
   // Sjekk om brukeren er logget inn ved å se etter brukerinformasjon
   // Hvis brukeren er logget inn, vis Dashboard-innholdet
@@ -17,11 +17,11 @@ export default function Dashboard() {
     return (
       <>
         <main>
-          <h2>Forslag for {loggedInUser} og bruker2</h2>
+          <h2>Forslag for {loggedInUser} og {friend}</h2>
           {/* GENRE SECTION */}
           <section className="genre-section">
             <h3>Utforsk: </h3>
-            <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangene du og "bruker2" begge liker.</p>
+            <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangene du og {friend} begge liker.</p>
             {/* TODO: make a component that gets all users except the one logged in
                   Solution: compare users with the loggedInUser  */}
               <Link to={"/movies_based_on_genre"}>genre 1</Link>

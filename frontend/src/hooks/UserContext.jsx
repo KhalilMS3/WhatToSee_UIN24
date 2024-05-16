@@ -9,7 +9,9 @@ export const UserProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState("")
-  
+  const [friendsList, setFriendsList] = useState([])
+  const [friend, setFriend] = useState("")
+  const [friendId, setFriendId] = useState("")
   const getAllUsers = async () => {
     const data = await fetchAllUsers()
     setUser(data);
@@ -21,7 +23,22 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser, loggedInUser, setLoggedInUser, userId, setUserId }}>
+    <UserContext.Provider value={{
+      loggedIn,
+      setLoggedIn,
+      user,
+      setUser,
+      loggedInUser,
+      setLoggedInUser,
+      userId,
+      setUserId,
+      friendsList,
+      setFriendsList,
+      friend,
+      setFriend,
+      friendId,
+      setFriendId
+    }}>
       {children}
     </UserContext.Provider>
   );

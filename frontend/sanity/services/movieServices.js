@@ -22,16 +22,15 @@ export async function fetchWishListedMovies(loggedInUser) {
   try {
     const data = await client.fetch(
       `*[_type == "users" && username == $loggedInUser]{
-         "wishlistedMovies": wishlistedMovies[]->{
-         "movietitle": movietitle,
-         "poster": poster,
-         "IMDBid": IMDBid,
-         "genres": genres[].genre
+          "wishlistedMovies": wishlistedMovies[]->{
+          "movietitle": movietitle,
+          "poster": poster,
+          "IMDBid": IMDBid,
+          "genres": genres[].genre
 }
-}`,
-      { loggedInUser }
-    );
-    return data;
+}`,{ loggedInUser });
+    return data
+
   } catch (error) {
     console.error("Error fetching favored films");
   }

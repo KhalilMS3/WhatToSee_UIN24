@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
 import { FaSmileWink, FaStar, FaHeart, FaSadTear } from "react-icons/fa";
 import WishlistSearchResult from './WishlistSearchResult';
 import FavoriteListSearchResult from './FavoriteListSearchResult';
+import { fetchUsersAsFriends } from '../../sanity/services/userServices';
 
 
 export default function Home() {
   // Bruk useUser-hooken for å få tilgang til den globale tilstanden
-const { loggedInUser } = useUser();
+   const { loggedInUser, friendsList, setFriendsList, friend, setFriend, friendId, setFriendId } = useUser();
+   
+   const getUsersAsFriends = async (loggedInUser) => {
+      const data = await fetchUsersAsFriends(loggedInUser)
+      setFriendsList(data)
+   }
+
+   const handleClick = (friend, friendId) => {
+      setFriend(friend)
+      setFriendId(friendId)
+      console.log(friend, friendId)
+   }
+   useEffect(() => {
+      getUsersAsFriends(loggedInUser)
+   }, [loggedInUser])
+   
 
   // Sjekk om brukeren er logget inn ved å se etter brukerinformasjon
   // Hvis brukeren er logget inn, vis Dashboard-innholdet
@@ -19,9 +35,11 @@ if (loggedInUser) {
          <h2>Hei, {loggedInUser} <FaSmileWink /></h2>
          <section className="friends-section">
             <h3>Se sammen med: </h3>
-            {/* TODO: make a component that gets all users except the one logged in
-                  Solution: compare users with the loggedInUser  */}
-               <Link to={"/dashboard"}>Odai</Link>
+               {
+                  friendsList?.map((friend, idx) => (
+                     <Link key={idx} to={"/dashboard"} onClick={handleClick(friend.username, friend._id)}>{friend.username}</Link>
+                  ))
+               }
          </section>
          <section className="movieLists-section">
                <section className="favorite-list">
