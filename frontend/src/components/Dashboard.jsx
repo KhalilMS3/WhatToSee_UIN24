@@ -1,8 +1,7 @@
 import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
-import WishlistSearchResult from './WishlistSearchResult';
-import FavoriteListSearchResult from './MoviesSearchResult';
+import {FavoriteListSearchResult, WishlistSearchResult} from './MoviesSearchResult';
 import { FaSadTear } from "react-icons/fa";
 
 
