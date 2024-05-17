@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
 import { FaSmileWink, FaStar, FaHeart, FaSadTear } from "react-icons/fa";
-import WishlistSearchResult from './WishlistSearchResult';
-import FavoriteListSearchResult from './FavoriteListSearchResult';
+import {FavoriteListSearchResult, WishlistSearchResult} from './MoviesSearchResult';
 import { fetchUsersAsFriends } from '../../sanity/services/userServices';
 
 

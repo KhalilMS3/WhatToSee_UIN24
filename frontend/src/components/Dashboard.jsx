@@ -2,7 +2,7 @@ import React from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
 import WishlistSearchResult from './WishlistSearchResult';
-import FavoriteListSearchResult from './FavoriteListSearchResult';
+import FavoriteListSearchResult from './MoviesSearchResult';
 import { FaSadTear } from "react-icons/fa";
 
 
@@ -17,13 +17,12 @@ export default function Dashboard() {
     return (
       <>
         <main>
-          <h2>Forslag for {loggedInUser} og {friend}</h2>
+          <h2>Forslag for {loggedInUser} og {friend} </h2>
           {/* GENRE SECTION */}
           <section className="genre-section">
             <h3>Utforsk: </h3>
             <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangene du og {friend} begge liker.</p>
-            {/* TODO: make a component that gets all users except the one logged in
-                  Solution: compare users with the loggedInUser  */}
+            
               <Link to={"/movies_based_on_genre"}>genre 1</Link>
               <Link to={"/movies_based_on_genre"}>genre 2</Link>
           </section>
