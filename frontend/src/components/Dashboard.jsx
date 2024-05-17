@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
-import {FavoriteListSearchResult, WishlistSearchResult} from './MoviesSearchResult';
 import { FaSadTear } from "react-icons/fa";
-
-
+import {FavoriteListSearchResult, WishlistSearchResult} from './MoviesSearchResult';
+import { fetchSameFavoredMovies } from '../../sanity/services/movieServices';
 
 export default function Dashboard() {
   // Bruk useUser-hooken for å få tilgang til den globale tilstanden
   const { loggedInUser, friend, friendId} = useUser();
+  
 
+  const getSameFavoredMovies = async (loggedInUser, friend) => {
+
+    const data = await fetchSameFavoredMovies(loggedInUser, friend)
+
+    const LoggedInUserFavMovies = data[loggedInUser][0]?.favoredMovies || []
+    const FriendFavMovies = data[friend][0]?.favoredMovies || []
+
+    const SameMoviesComparison = LoggedInUserFavMovies.filter(
+      movie1 => FriendFavMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
+    console.log(SameMoviesComparison)
+  }
+
+  
+  useEffect(() => {
+    getSameFavoredMovies(loggedInUser, friend)
+  }, [loggedInUser])
+  
   // Sjekk om brukeren er logget inn ved å se etter brukerinformasjon
   // Hvis brukeren er logget inn, vis Dashboard-innholdet
   if (loggedInUser) {
@@ -21,7 +38,6 @@ export default function Dashboard() {
           <section className="genre-section">
             <h3>Utforsk: </h3>
             <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangene du og {friend} begge liker.</p>
-            
               <Link to={"/movies_based_on_genre"}>genre 1</Link>
               <Link to={"/movies_based_on_genre"}>genre 2</Link>
           </section>

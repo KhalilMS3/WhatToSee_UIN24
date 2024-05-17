@@ -2,20 +2,20 @@ import { client } from "../client";
 
 export async function fetchFavoredMovies(loggedInUser) {
 
-   try {
+  try {
       const data = await client.fetch(
       `*[_type == "users" && username == $loggedInUser]{
-         "favoredMovies": favoredMovies[]->{
-         "movietitle": movietitle,
-         "poster": poster,
-         "IMDBid": IMDBid,
-         "genres": genres[].genre
+        "favoredMovies": favoredMovies[]->{
+        "movietitle": movietitle,
+        "poster": poster,
+        "IMDBid": IMDBid,
+        "genres": genres[].genre
 }
 }`,{loggedInUser});
       return data
-   } catch(error) {
+  } catch(error) {
       console.error("Error fetching favored films")
-   }
+  }
 }
 
 export async function fetchWishListedMovies(loggedInUser) {
@@ -32,6 +32,31 @@ export async function fetchWishListedMovies(loggedInUser) {
     return data
 
   } catch (error) {
-    console.error("Error fetching favored films");
+    console.error("Error fetching favored movies");
+  }
+}
+
+export async function fetchSameFavoredMovies(loggedInUser, friend) {
+  try {
+    const data = await client.fetch(
+      `{
+  $loggedInUser: *[_type == "users" && username == $loggedInUser]{
+    "favoredMovies": favoredMovies[]->{
+      "movietitle": movietitle,
+      "poster": poster,
+      "IMDBid": IMDBid
+    }
+  },
+  $friend: *[_type == "users" && username == $friend]{
+    "favoredMovies": favoredMovies[]->{
+      "movietitle": movietitle,
+      "poster": poster,
+      "IMDBid": IMDBid
+    }
+  }
+}`,{loggedInUser, friend});
+    return data
+  } catch (error) {
+    console.error("Error fetching same favored movies");
   }
 }
