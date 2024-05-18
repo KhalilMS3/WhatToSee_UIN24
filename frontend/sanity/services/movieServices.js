@@ -36,9 +36,12 @@ export async function fetchWishListedMovies(loggedInUser) {
   }
 }
 
+// Use this in "Go Safe!" section i dashboard
+
 export async function fetchSameFavoredMovies(loggedInUser, friend) {
   try {
     const data = await client.fetch(
+      // fetching the favored lists of both users in order to compare them and find same movies
       `{
   $loggedInUser: *[_type == "users" && username == $loggedInUser]{
     "favoredMovies": favoredMovies[]->{
@@ -60,3 +63,4 @@ export async function fetchSameFavoredMovies(loggedInUser, friend) {
     console.error("Error fetching same favored movies");
   }
 }
+
