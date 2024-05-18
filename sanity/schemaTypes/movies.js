@@ -22,7 +22,7 @@ export const movies = {
          title: 'Sjangere',
          name: 'genres',
          type: 'array',
-         of:[{type: 'favoriteGenres'}]
+         of:[{type: 'string'}]
       }
    ]
 }

@@ -4,7 +4,8 @@ import { useUser } from '../hooks/UserContext';
 import MovieCard from './MovieCard';
 
 export default function SameFavoredMovies() {
-   const { loggedInUser, friend} = useUser();
+   const { loggedInUser, friend } = useUser();
+   
    const [loggedInUserFavMovies, setLoggedInUserFavMovies] = useState([]);
    const [friendFavMovies, setFriendFavMovies] = useState([]);
    const [sameMoviesComparison, setSameMoviesComparison] = useState([]);
@@ -47,14 +48,6 @@ export default function SameFavoredMovies() {
          ))
 }
       </section>
-  )
-}
-
-import React from 'react'
-
-export default function SameWishlistedMovies() {
-  return (
-   <h1>2</h1>
   )
 }
 
