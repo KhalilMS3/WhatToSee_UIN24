@@ -24,7 +24,7 @@ export const users = {
       title: 'Favoritt sjangere',
       name: 'favoredGenres',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'favoriteGenres' }]}],
+      of: [{type: 'string'}]
     },
   ],
 }

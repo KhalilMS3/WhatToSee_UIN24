@@ -1,19 +1,52 @@
 import React, { useEffect, useState } from 'react';
+import { useUser } from '../hooks/UserContext';
+import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
 import { FaSadTear } from "react-icons/fa";
+import { writeClient } from '../../sanity/client';
 import {FavoriteListSearchResult, WishlistSearchResult} from './MoviesSearchResult';
 
 import MovieCard from './MovieCard';
 import SameFavoredMovies from './ComparedMovies';
 
 export default function Dashboard() {
-  // Bruk useUser-hooken for å få tilgang til den globale tilstanden
-  const { loggedInUser, friend, friendId} = useUser();
+  const { loggedInUser, userId } = useUser();
+  const [commonGenres, setCommonGenres] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  
-  // Sjekk om brukeren er logget inn ved å se etter brukerinformasjon
-  // Hvis brukeren er logget inn, vis Dashboard-innholdet
+  useEffect(() => {
+    if (userId) {
+      fetchCommonGenres();
+    }
+  }, [userId]);
+
+  const fetchCommonGenres = async () => {
+    setLoading(true);
+    try {
+      const userDoc = await writeClient.fetch(`*[_type == "users" && _id == $userId]{favoredGenres}`, { userId });
+      const otherUserDoc = await writeClient.fetch(`*[_type == "users" && _id == "e5396d55-0493-4ab5-ad9f-04fb421b382d"]{favoredGenres}`);
+
+      if (userDoc.length > 0 && otherUserDoc.length > 0) {
+        const userGenres = new Set(userDoc[0].favoredGenres || []);
+        const otherUserGenres = new Set(otherUserDoc[0].favoredGenres || []);
+
+        const common = [...userGenres].filter(genre => otherUserGenres.has(genre));
+        setCommonGenres(common);
+      } else {
+        setCommonGenres([]);
+      }
+
+      setError(null);
+    } catch (error) {
+      console.error('Failed to fetch common genres:', error);
+      setError('Failed to fetch common genres');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loggedInUser) {
     return (
       <>
@@ -22,9 +55,18 @@ export default function Dashboard() {
           {/* GENRE SECTION */}
           <section className="genre-section">
             <h3>Utforsk: </h3>
-            <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangene du og {friend} begge liker.</p>
-              <Link to={"/movies_based_on_genre"}>genre 1</Link>
-              <Link to={"/movies_based_on_genre"}>genre 2</Link>
+            <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangrene du og "bruker2" begge liker.</p>
+            {loading ? (
+              <p>Laster...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : commonGenres.length > 0 ? (
+              commonGenres.map((genre, idx) => (
+                <Link key={idx} to={`/movies_based_on_genre?genre=${genre}`}>{genre}</Link>
+              ))
+            ) : (
+              <p>Ingen felles sjangere funnet</p>
+            )}
           </section>
 
           {/* LISTS of movies */}
@@ -46,21 +88,16 @@ export default function Dashboard() {
       </>
     );
   } else {
-
-    // Hvis brukeren ikke er logget inn, vis feilmelding
     return (
       <>
         <main>
           <section className='login-err-msg'>
-               <h2 className='oops'>Ooops ! <FaSadTear /></h2>
-               <p className='error-msg'>403 - Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</p>
-               <Link to={"/"}>Logg inn</Link>
-            </section>
-
+            <h2 className='oops'>Ooops ! <FaSadTear /></h2>
+            <p className='error-msg'>403 - Du kan ikke få tilgang til denne siden fordi du ikke er logget inn.</p>
+            <Link to={"/"}>Logg inn</Link>
+          </section>
         </main>
       </>
     );
   }
 }
-
-

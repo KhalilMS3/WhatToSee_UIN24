@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; 
 import { writeClient } from '../../sanity/client';
 import { FaStar } from "react-icons/fa";
 
 //apikey: d2ca980ddcmsh43b9d3e642be0a8p1d08c1jsne846de12bbc5
 
-export default function Genre({user}) {
+export default function Genre() {
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { loggedInUser, userId } = useUser();
+    const { userId } = useUser();
     
 
-    
     useEffect(() => {
         fetchGenres();
     }, []);
@@ -23,7 +22,7 @@ export default function Genre({user}) {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'd2ca980ddcmsh43b9d3e642be0a8p1d08c1jsne846de12bbc5', // Bruker miljøvariabel her
+                'X-RapidAPI-Key': 'd2ca980ddcmsh43b9d3e642be0a8p1d08c1jsne846de12bbc5',
                 'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
             }
         };
@@ -35,13 +34,10 @@ export default function Genre({user}) {
             }
             const data = await response.json();
             
-            // Henter favorittsjangere fra Sanity
-            const favoriteGenresQuery = `*[_type == "favoriteGenres" && user._ref == $userId]`;
-            const favoriteGenresParams = { userId: userId };
-            const favoriteGenres = await writeClient.fetch(favoriteGenresQuery, favoriteGenresParams);
-    
-            // Oppretter et Set for raskere sjekk
-            const favoriteGenresSet = new Set(favoriteGenres.map(fav => fav.genre));
+            // Henter brukerdokumentet fra Sanity
+            const userDoc = await writeClient.fetch(`*[_type == "users" && _id == $userId]{favoredGenres}`, { userId });
+
+            const favoriteGenresSet = new Set(userDoc[0]?.favoredGenres || []);
     
             // Setter sjangerlisten med favorittstatus
             const genresWithFavorites = data.results.map(genre => ({
@@ -58,13 +54,8 @@ export default function Genre({user}) {
             setLoading(false);
         }
     };
-    
-
-
-
 
     const toggleFavorite = async (genreName) => {
-        const isFavorite = genres.find(genre => genre.name === genreName).isFavorite;
         const updatedGenres = genres.map(genre => {
             if (genre.name === genreName) {
                 return { ...genre, isFavorite: !genre.isFavorite };
@@ -72,66 +63,52 @@ export default function Genre({user}) {
             return genre;
         });
         setGenres(updatedGenres);
-        await updateFavoriteStatus(genreName, !isFavorite);
-    };
 
-    const updateFavoriteStatus = async (genreName, isFavorite) => {
-        if (isFavorite) {
-            // Hvis sjangeren skal legges til i favoritter
-            const doc = {
-                _type: 'favoriteGenres',
-                user: {_type: 'reference', _ref: userId },
-                genre: genreName
-            };
-            try {
-                await writeClient.create(doc);
-                console.log('Genre added to favorites:', genreName);
-            } catch (error) {
-                console.error('Error adding genre to favorites:', error);
-            }
+        const userDoc = await writeClient.fetch(`*[_type == "users" && _id == $userId]{favoredGenres}`, { userId });
+        const favoredGenres = new Set(userDoc[0]?.favoredGenres || []);
+
+        if (favoredGenres.has(genreName)) {
+            favoredGenres.delete(genreName);
         } else {
-            // Hvis sjangeren skal fjernes fra favoritter
-            const query = `*[_type == "favoriteGenres" && user._ref == $userId && genre == $genreName]`;
-            const params = { userId, genreName };
-            try {
-                const results = await writeClient.fetch(query, params);
-                if (results.length > 0) {
-                    for (const doc of results) {
-                        await writeClient.delete(doc._id);
-                    }
-                    console.log('Genre removed from favorites:', genreName);
-                } else {
-                    console.log('No favorite genre found to remove');
-                }
-            } catch (error) {
-                console.error('Error removing genre from favorites:', error);
-            }
+            favoredGenres.add(genreName);
+        }
+
+        try {
+            await writeClient.patch(userId)
+                .set({ favoredGenres: Array.from(favoredGenres) })
+                .commit();
+            console.log('Genre favorite status updated:', genreName);
+        } catch (error) {
+            console.error('Error updating favorite genres:', error);
         }
     };
-    
 
     return (
         <>
-        <h2>Sjangere</h2>
-        <section>
-            <ul className="genre-list">
-                {genres?.map((genre, idx) => {
-                    return genre.name !== null ?
-                    <li key={idx} className="genre-item">
-                        {genre.name}
-                        {genre.isFavorite ? 
-                            <button className='add-btn' onClick={() => toggleFavorite(genre.name)}>
-                                <FaStar/> Remove from favorite
-                            </button>    
-                            :
-                            <button className='remove-btn' onClick={() => toggleFavorite(genre.name)}>
-                                <FaStar/> Add to favorite
-                            </button> 
-                    }
-                    </li> : null
-                })}
-            </ul>
-        </section>
-                </>
+            <h2>Sjangere</h2>
+            {loading ? (
+                <p>Laster...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <section>
+                    <ul className="genre-list">
+                        {genres?.map((genre, idx) => (
+                            genre.name !== null ? (
+                                <li key={idx} className="genre-item">
+                                    {genre.name}
+                                    <button
+                                        className={genre.isFavorite ? 'remove-btn' : 'add-btn'}
+                                        onClick={() => toggleFavorite(genre.name)}
+                                    >
+                                        <FaStar /> {genre.isFavorite ? 'Remove from favorite' : 'Add to favorite'}
+                                    </button>
+                                </li>
+                            ) : null
+                        ))}
+                    </ul>
+                </section>
+            )}
+        </>
     );
 }
