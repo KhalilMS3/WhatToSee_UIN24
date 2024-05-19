@@ -3,7 +3,7 @@ import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
 import { FaSadTear } from "react-icons/fa";
 
-import SameFavoredMovies from './ComparedMovies';
+import {SameFavoredMovies, SameWishlistedMovies} from './ComparedMovies';
 import ComparedGenres from './ComparedGenres';
 
 export default function Dashboard() {
@@ -22,7 +22,7 @@ export default function Dashboard() {
             {/*TODO: Movies rendered here will be based on a comparison between users wish lists (favortie list comparison)*/}
               <section className="catchUp-list">
                   <h4>Catch Up!</h4>
-                <SameFavoredMovies />
+                <SameWishlistedMovies />
               </section>
             <span className='divider'></span>
             {/*TODO: Movies rendered here will be based on a comparison between users favorite lists */}

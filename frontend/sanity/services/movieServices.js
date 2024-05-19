@@ -32,13 +32,13 @@ export async function fetchWishListedMovies(loggedInUser) {
     return data
 
   } catch (error) {
-    console.error("Error fetching favored movies");
+    console.error("Error fetching wishlisted movies");
   }
 }
 
 // Use this in "Go Safe!" section i dashboard
 
-export async function fetchSameFavoredMovies(loggedInUser, friend) {
+export async function fetchMovieListsOfUsers(loggedInUser, friend) {
   try {
     const data = await client.fetch(
       // fetching the favored lists of both users in order to compare them and find same movies
@@ -48,6 +48,11 @@ export async function fetchSameFavoredMovies(loggedInUser, friend) {
       "movietitle": movietitle,
       "poster": poster,
       "IMDBid": IMDBid
+    },
+    "wishlistedMovies": wishlistedMovies[]->{
+      "movietitle": movietitle,
+      "poster": poster,
+      "IMDBid": IMDBid
     }
   },
   $friend: *[_type == "users" && username == $friend]{
@@ -55,35 +60,7 @@ export async function fetchSameFavoredMovies(loggedInUser, friend) {
       "movietitle": movietitle,
       "poster": poster,
       "IMDBid": IMDBid
-    }
-  }
-}`,{loggedInUser, friend});
-    return data
-  } catch (error) {
-    console.error("Error fetching same favored movies");
-  }
-}
-
-// Use this in "Catch up!" section i dashboard
-
-
-/* FETCH OF SAME MOVIES FROM
-        - loggedInUser: wishlist
-        - friend: wishlist
-
-export async function fetchSameWishListedMovies(loggedInUser, friend) {
-  try {
-    const data = await client.fetch(
-      // fetching the wishlists of both users in order to compare them and find same movies
-      `{
-  $loggedInUser: *[_type == "users" && username == $loggedInUser]{
-    "wishlistedMovies": wishListedMovies[]->{
-      "movietitle": movietitle,
-      "poster": poster,
-      "IMDBid": IMDBid
-    }
-  },
-  $friend: *[_type == "users" && username == $friend]{
+    },
     "wishlistedMovies": wishlistedMovies[]->{
       "movietitle": movietitle,
       "poster": poster,
@@ -99,6 +76,8 @@ export async function fetchSameWishListedMovies(loggedInUser, friend) {
   }
 }
 
+
+/*
 component function
 const getSameFavoredAndWishListedMovies = async (loggedInUser, friend) => {
 
