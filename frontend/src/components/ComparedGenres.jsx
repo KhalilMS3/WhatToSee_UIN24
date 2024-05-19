@@ -20,9 +20,10 @@ export default function ComparedGenres() {
       setLoggedInUserFavGenres(loggedInUserFavGenres)
       setFriendFavGenres(friendFavGenres)
 
-      const sameGenresComparison = loggedInUserFavGenres.filter(
-         genre1 => friendFavGenres.some(genre2 => genre2.favoredGenres === genre1.favoredGenres)
-      )
+      //sammen ligne sjangere som er tilfelles
+      const sameGenresComparison = loggedInUserFavGenres.filter(genre =>
+         friendFavGenres.includes(genre)
+      );
       setSameGenresComparison(sameGenresComparison)
    
    }

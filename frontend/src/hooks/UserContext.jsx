@@ -17,6 +17,8 @@ export const UserProvider = ({ children }) => {
     setUser(data);
   };
 
+  
+
 
   useEffect(() => {
     getAllUsers();
