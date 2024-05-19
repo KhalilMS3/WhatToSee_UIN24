@@ -9,6 +9,7 @@ export  function SameFavoredMovies() {
    const [loggedInUserFavMovies, setLoggedInUserFavMovies] = useState([]);
    const [friendFavMovies, setFriendFavMovies] = useState([]);
    const [sameMoviesComparison, setSameMoviesComparison] = useState([]);
+   const [totalMovies, setTotalMovies] = useState(0)
 
    const getSameFavoredMovies = async (loggedInUser, friend) => {
 
@@ -23,19 +24,19 @@ export  function SameFavoredMovies() {
    const sameMoviesComparison = loggedInUserFavMovies.filter(
       movie1 => friendFavMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
    
-   setSameMoviesComparison(sameMoviesComparison)
+      setSameMoviesComparison(sameMoviesComparison)
+      setTotalMovies(sameMoviesComparison.length)
    }
    
    
    useEffect(() => {
       getSameFavoredMovies(loggedInUser, friend)
    }, [loggedInUser])
-   
-   console.log(sameMoviesComparison)
 
    return (
       <section className="GoSafe-list">
          <h4>Go Safe!</h4>
+         <p>Dere har {totalMovies} felles film(er) i deres favoritt lister</p>
          <section className="movie-cards-section">
             {
                sameMoviesComparison?.map((movie, idx) => (
@@ -59,6 +60,7 @@ export function SameWishlistedMovies() {
    const [loggedInUserWLMovies, setLoggedInUserWLMovies] = useState([]);
    const [friendWLMovies, setFriendWLMovies] = useState([]);
    const [sameMoviesComparison, setSameMoviesComparison] = useState([]);
+   const [totalMovies, setTotalMovies] = useState(0)
 
    const getSameWishlistedMovies = async (loggedInUser, friend) => {
 
@@ -66,22 +68,27 @@ export function SameWishlistedMovies() {
    
    const loggedInUserWLMovies = data[loggedInUser][0]?.wishlistedMovies || []
    const friendWLMovies = data[friend][0]?.wishlistedMovies || []
-      
+    
    setLoggedInUserWLMovies(loggedInUserWLMovies)
    setFriendWLMovies(friendWLMovies)
-      
+   
+   
    const SameMoviesComparison = loggedInUserWLMovies.filter(
       movie1 => friendWLMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
-   setSameMoviesComparison(SameMoviesComparison)
+      setSameMoviesComparison(SameMoviesComparison)
+
+      setTotalMovies(SameMoviesComparison.length)
    }
-      
+   
+
    useEffect(() => {
       getSameWishlistedMovies(loggedInUser, friend)
    },[loggedInUser])
 
    return (
      <section className="catchUp-list">
-                  <h4>Catch Up!</h4>
+         <h4>Catch Up!</h4>
+         <p>Dere har {totalMovies} felles film(er) i deres ønskelister</p>
      <section className="movie-cards-section">
          
       {

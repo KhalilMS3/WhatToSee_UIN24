@@ -40,11 +40,6 @@ main{
       h3{
          margin-bottom: 0;
       }
-      p, a{
-         color: $primary-color;
-         padding: 0px 20px;
-         font-weight: $bold-500;
-      }
       p{
          margin-top: 0;
       }
@@ -52,6 +47,15 @@ main{
          font-size: 1.5rem;
       }
 
+}
+.catchUp-list, .GoSafe-list{
+   h4{
+      margin: 0;
+   }
+   p{
+      padding: 0 20px;
+      
+   }
 }
 
 .fav-and-wishlist-compare-sec{
@@ -71,3 +75,4 @@ main{
       flex-wrap: wrap;
    }
 }
+
