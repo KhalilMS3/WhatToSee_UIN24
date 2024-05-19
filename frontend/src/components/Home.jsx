@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link } from 'react-router-dom';
 import { FaSmileWink, FaStar, FaHeart, FaSadTear } from "react-icons/fa";
-import {FavoriteListSearchResult, WishlistSearchResult} from './MoviesSearchResult';
+import {FavoriteListFetchResult, WishlistFetchResult} from './MoviesFetchResult';
 import { fetchUsersAsFriends } from '../../sanity/services/userServices';
 
 
@@ -43,12 +43,12 @@ if (loggedInUser) {
          <section className="movieLists-section">
                <section className="favorite-list">
                   <h4> <FaStar /> Ditt favorittliste</h4>
-                     <FavoriteListSearchResult />
+                     <FavoriteListFetchResult />
                </section>
                <span className='divider'></span>
                <section className="wish-list">
                   <h4> <FaHeart /> Ditt ønskeliste</h4>
-                     <WishlistSearchResult/>
+                     <WishlistFetchResult/>
                </section>
          </section>
       </main>

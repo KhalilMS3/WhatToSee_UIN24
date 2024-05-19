@@ -34,19 +34,21 @@ export  function SameFavoredMovies() {
    console.log(sameMoviesComparison)
 
    return (
-      <section className="movie-cards-section">
-         
-      {
-         sameMoviesComparison?.map((movie, idx) => (
-            < MovieCard
-            key={idx}
-            movietitle={movie.movietitle}
-            poster={movie.poster}
-            IMDBid={movie.IMDBid}
-            genres={movie.genres}
-            />
-         ))
-}
+      <section className="GoSafe-list">
+         <h4>Go Safe!</h4>
+         <section className="movie-cards-section">
+            {
+               sameMoviesComparison?.map((movie, idx) => (
+                  < MovieCard
+                  key={idx}
+                  movietitle={movie.movietitle}
+                  poster={movie.poster}
+                  IMDBid={movie.IMDBid}
+                  genres={movie.genres}
+                  />
+               ))
+            }
+         </section>
       </section>
   )
 }
@@ -77,7 +79,9 @@ export function SameWishlistedMovies() {
       getSameWishlistedMovies(loggedInUser, friend)
    },[loggedInUser])
 
-  return (
+   return (
+     <section className="catchUp-list">
+                  <h4>Catch Up!</h4>
      <section className="movie-cards-section">
          
       {
@@ -92,5 +96,7 @@ export function SameWishlistedMovies() {
          ))
 }
       </section>
+      </section>
   )
 }
+

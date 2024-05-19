@@ -3,7 +3,7 @@ import MovieCard from './MovieCard'
 import { useUser } from '../hooks/UserContext'; 
 import { fetchFavoredMovies, fetchWishListedMovies } from '../../sanity/services/movieServices';
 
-export function FavoriteListSearchResult() {
+export function FavoriteListFetchResult() {
   const { loggedInUser } = useUser()
   const [movies, setMovies] = useState([])
 
@@ -37,7 +37,7 @@ export function FavoriteListSearchResult() {
 }
 
 
-export function WishlistSearchResult() {
+export function WishlistFetchResult() {
   const { loggedInUser } = useUser()
   const [movies, setMovies] = useState([])
 

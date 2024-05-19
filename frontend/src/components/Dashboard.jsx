@@ -5,6 +5,7 @@ import { FaSadTear } from "react-icons/fa";
 
 import {SameFavoredMovies, SameWishlistedMovies} from './ComparedMovies';
 import ComparedGenres from './ComparedGenres';
+import FavoritesWishlistComparison from './FavoritesWishlistComparison';
 
 export default function Dashboard() {
   const { loggedInUser, friend } = useUser();
@@ -16,22 +17,13 @@ export default function Dashboard() {
           <h2>Forslag for {loggedInUser} og {friend} </h2>
           {/* GENRE SECTION */}
           <ComparedGenres />
-
           {/* LISTS of movies */}
           <section className="movieLists-section">
-            {/*TODO: Movies rendered here will be based on a comparison between users wish lists (favortie list comparison)*/}
-              <section className="catchUp-list">
-                  <h4>Catch Up!</h4>
-                <SameWishlistedMovies />
-              </section>
+            <SameWishlistedMovies />
             <span className='divider'></span>
-            {/*TODO: Movies rendered here will be based on a comparison between users favorite lists */}
-            
-              <section className="GoSafe-list">
-                  <h4>Go safe!</h4>
-                  <SameFavoredMovies/>
-              </section>
-        </section>
+            <SameFavoredMovies/>
+          </section>
+            <FavoritesWishlistComparison/>
         </main>
       </>
     );

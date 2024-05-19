@@ -36,7 +36,6 @@ export async function fetchWishListedMovies(loggedInUser) {
   }
 }
 
-// Use this in "Go Safe!" section i dashboard
 
 export async function fetchMovieListsOfUsers(loggedInUser, friend) {
   try {
@@ -87,7 +86,7 @@ const getSameFavoredAndWishListedMovies = async (loggedInUser, friend) => {
     const FriendFavMovies = data[friend][0]?.wishlistedMovies || []
 
     const SameMoviesComparison = LoggedInUserFavMovies.filter(
-      movie1 => FriendFavMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
+      movie1 => FriendwlMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
     console.log(SameMoviesComparison)
   }
 */
