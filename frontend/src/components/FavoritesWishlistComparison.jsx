@@ -3,8 +3,8 @@ import { fetchMovieListsOfUsers } from '../../sanity/services/movieServices';
 import { useUser } from '../hooks/UserContext';
 import MovieCard from './MovieCard';
 
-export default function FavoritesWishlistComparison() {
-   const { loggedInUser, friend } = useUser();
+export default function FavoritesWishlistComparison({friend}) {
+   const { loggedInUser } = useUser();
    
    const [loggedInUserFavMovies, setLoggedInUserFavMovies] = useState([]);
    const [loggedInUserWlMovies, setLoggedInUserWlMovies] = useState([]);

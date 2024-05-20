@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSmileWink, FaStar, FaHeart, FaSadTear } from "react-icons/fa";
 import {FavoriteListFetchResult, WishlistFetchResult} from './MoviesFetchResult';
 import { fetchUsersAsFriends } from '../../sanity/services/userServices';
@@ -8,18 +8,22 @@ import { fetchUsersAsFriends } from '../../sanity/services/userServices';
 
 export default function Home() {
   // Bruk useUser-hooken for å få tilgang til den globale tilstanden
-   const { loggedInUser, friendsList, setFriendsList, friend, setFriend, friendId, setFriendId } = useUser();
+   const { loggedInUser, friendsList, setFriendsList} = useUser();
    
+   const [friend, setFriend] = useState("")
+   const [friendId, setFriendId] = useState("")
+
+   const navigate = useNavigate()
    const getUsersAsFriends = async (loggedInUser) => {
       const data = await fetchUsersAsFriends(loggedInUser)
       setFriendsList(data)
    }
 
    const handleClick = (friend, friendId) => {
-      setFriend(friend)
-      setFriendId(friendId)
-      console.log(friend, friendId)
+      navigate("/dashboard", {state: {friend, friendId}})
    }
+   
+   
    useEffect(() => {
       getUsersAsFriends(loggedInUser)
    }, [loggedInUser])
@@ -36,7 +40,9 @@ if (loggedInUser) {
             <h3>Se sammen med: </h3>
                {
                   friendsList?.map((friend, idx) => (
-                     <Link key={idx} to={"/dashboard"} onClick={handleClick(friend.username, friend._id)}>{friend.username}</Link>
+                     <button
+                        key={idx}
+                        onClick={() => handleClick(friend.username, friend._id)}>{friend.username}</button>
                   ))
                }
          </section>

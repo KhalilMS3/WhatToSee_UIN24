@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaSadTear } from "react-icons/fa";
 
 import {SameFavoredMovies, SameWishlistedMovies} from './ComparedMovies';
@@ -8,22 +8,25 @@ import ComparedGenres from './ComparedGenres';
 import FavoritesWishlistComparison from './FavoritesWishlistComparison';
 
 export default function Dashboard() {
-  const { loggedInUser, friend } = useUser();
+  const { loggedInUser } = useUser();
+  const location = useLocation();
+  const { friend } = location.state || []
   
+  console.log(friend)
   if (loggedInUser) {
     return (
       <>
         <main>
           <h2>Forslag for {loggedInUser} og {friend} </h2>
           {/* GENRE SECTION */}
-          <ComparedGenres />
+          <ComparedGenres friend={friend} />
           {/* LISTS of movies */}
           <section className="movieLists-section">
-            <SameWishlistedMovies />
+            <SameWishlistedMovies friend={friend} />
             <span className='divider'></span>
-            <SameFavoredMovies/>
+            <SameFavoredMovies friend={friend}/>
           </section>
-            <FavoritesWishlistComparison/>
+          <FavoritesWishlistComparison friend={friend} />
         </main>
       </>
     );
