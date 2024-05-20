@@ -12,6 +12,7 @@ export default function Header() {
 
    const handleLogOut = () => {
       localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('userId');
       setLoggedInUser(null);
       setLoggedIn(false);
       navigate("/");
