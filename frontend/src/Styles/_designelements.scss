@@ -12,7 +12,7 @@ main{
 
 .movieLists-section{
    display: flex;
-   gap: 8rem;
+   gap: rem;
    .divider {
          position: relative;
          &::after {
@@ -24,19 +24,14 @@ main{
             border-left: 5px dashed $primary-color;
          }
       }
-      // section
-   .movie-cards-section{
-      display: flex;
-      flex-wrap: wrap;
    }
    
-}
-// div
+// section
 .movie-cards-section{
    display: flex;
-   gap: 1;
    flex-wrap: wrap;
 }
+
 .friends-section, .genre-section{
       padding: 0px 10px;
       margin: 10px 20px;

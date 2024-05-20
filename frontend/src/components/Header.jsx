@@ -39,7 +39,8 @@ export default function Header() {
                      </Link>
                   </li>
                   <li className="menuItem">
-                     <FaUserCircle /> {loggedInUser} <button onClick={handleLogOut}>Logg ut</button>
+                     <FaUserCircle /> {loggedInUser}
+                     <button onClick={handleLogOut}>Logg ut</button>
                   </li>
                </ul>
             )}

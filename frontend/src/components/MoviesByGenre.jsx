@@ -20,19 +20,21 @@ export default function MoviesByGenre() {
    }, [genre]);
 
    return (
+      <main>
+      <h2>Filmer i sjangeren: {genre} ({movies.length}) Filmer</h2> 
       <section className="movies-by-genre">
-         <h2>Filmer i sjangeren: {genre} ({movies.length}) Filmer</h2> 
-         <div className="movie-cards-section">
+         <section className="movie-cards-section">
             {movies.map((movie, idx) => (
                <MovieCard
-                  key={idx}
-                  movietitle={movie.movietitle}
-                  poster={movie.poster}
-                  IMDBid={movie.IMDBid}
-                  genres={movie.genres}
+               key={idx}
+               movietitle={movie.movietitle}
+               poster={movie.poster}
+               IMDBid={movie.IMDBid}
+               genres={movie.genres}
                />
             ))}
-         </div>
+         </section>
       </section>
+      </main>
    );
 }

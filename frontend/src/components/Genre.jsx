@@ -88,6 +88,8 @@ export default function Genre() {
 
     return (
         <>
+            <main>
+
             <h2>Sjangere</h2>
             {loading ? (
                 <p>Laster...</p>
@@ -106,7 +108,7 @@ export default function Genre() {
                                     <button
                                         className={genre.isFavorite ? 'add-btn' : 'remove-btn'}
                                         onClick={() => toggleFavorite(genre.name)}
-                                    >
+                                        >
                                         <FaStar /> {genre.isFavorite ? 'Remove from favorite' : 'Add to favorite'}
                                     </button>
                                 </li>
@@ -115,6 +117,7 @@ export default function Genre() {
                     </ul>
                 </section>
             )}
+            </main>
         </>
     );
 }

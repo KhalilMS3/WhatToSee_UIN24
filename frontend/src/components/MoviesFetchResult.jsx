@@ -51,7 +51,7 @@ export function WishlistFetchResult() {
   
   return (
     
-    <section className="movie-card-section">
+    <section className="movie-cards-section">
       {
         movies?.map(movie => (
           movie?.wishlistedMovies?.map((wlMovie, idx) => (
