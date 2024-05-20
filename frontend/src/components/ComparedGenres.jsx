@@ -40,20 +40,20 @@ export default function ComparedGenres() {
       }
    }, [loggedInUser, friend]);
 
-   const handleGenreClick = (genre) => {
-      navigate(`/movies_by_genre?genre=${genre}`);
-   };
+   //const handleGenreClick = (genre) => {
+     // navigate(`/movies_by_genre?genre=${genre}`);
+   //};
 
    return (
       <section className="genre-section">
          <h3>Utforsk:</h3>
          <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangrene du og {friend} begge liker.</p>
          {sameGenresComparison.map((genre, idx) => (
-            <li key={idx}>
-            <Link to={`/movies_by_genre?genre=${genre}`}>
+            
+            <Link key={idx} to={`/movies_by_genre?genre=${genre}`}>
                {genre}
             </Link>
-         </li>
+         
          ))}
       </section>
    );
