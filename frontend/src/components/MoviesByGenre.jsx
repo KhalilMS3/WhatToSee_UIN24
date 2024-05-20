@@ -21,7 +21,7 @@ export default function MoviesByGenre() {
 
    return (
       <section className="movies-by-genre">
-         <h2>Filmer i sjangeren: {genre}</h2>
+         <h2>Filmer i sjangeren: {genre} ({movies.length}) Filmer</h2> 
          <div className="movie-cards-section">
             {movies.map((movie, idx) => (
                <MovieCard

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useUser } from '../hooks/UserContext';
-import { writeClient } from '../../sanity/client';
-import { Link } from 'react-router-dom';
-import { FaStar } from "react-icons/fa";
+import React, { useEffect, useState } from 'react'; 
+import { useUser } from '../hooks/UserContext'; 
+import { writeClient, client } from '../../sanity/client'; 
+import { Link } from 'react-router-dom'; 
+import { FaStar } from "react-icons/fa"; 
 
 export default function Genre() {
-    const [genres, setGenres] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const { userId } = useUser();
+    const [genres, setGenres] = useState([]); 
+    const [loading, setLoading] = useState(false); 
+    const [error, setError] = useState(null); 
+    const { userId } = useUser(); 
 
     useEffect(() => {
-        fetchGenres();
+        fetchGenres(); 
     }, []);
 
     const fetchGenres = async () => {
-        setLoading(true);
+        setLoading(true); 
         const url = 'https://moviesdatabase.p.rapidapi.com/titles/utils/genres';
         const options = {
             method: 'GET',
@@ -26,33 +26,38 @@ export default function Genre() {
         };
     
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(url, options); // Hent sjangere fra API-et
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            
-            // Henter brukerdokumentet fra Sanity
+
+            // Hent brukerdokumentet fra Sanity
             const userDoc = await writeClient.fetch(`*[_type == "users" && _id == $userId]{favoredGenres}`, { userId });
 
             const favoriteGenresSet = new Set(userDoc[0]?.favoredGenres || []);
     
-            // Setter sjangerlisten med favorittstatus
-            const genresWithFavorites = data.results.map(genre => ({
-                name: genre,
-                isFavorite: favoriteGenresSet.has(genre)
+            // Hent antall filmer for hver sjanger fra Sanity
+            const genresWithCounts = await Promise.all(data.results.map(async genre => {
+                const count = await client.fetch(`count(*[_type == "movies" && "${genre}" in genres])`);
+                return {
+                    name: genre,
+                    count: count,
+                    isFavorite: favoriteGenresSet.has(genre)
+                };
             }));
     
-            setGenres(genresWithFavorites);
-            setError(null);
+            setGenres(genresWithCounts); 
+            setError(null); 
         } catch (error) {
             console.error('Failed to fetch genres:', error);
-            setError('Failed to fetch genres');
+            setError('Failed to fetch genres'); 
         } finally {
-            setLoading(false);
+            setLoading(false); 
         }
     };
 
+    
     const toggleFavorite = async (genreName) => {
         const updatedGenres = genres.map(genre => {
             if (genre.name === genreName) {
@@ -60,7 +65,7 @@ export default function Genre() {
             }
             return genre;
         });
-        setGenres(updatedGenres);
+        setGenres(updatedGenres); 
 
         const userDoc = await writeClient.fetch(`*[_type == "users" && _id == $userId]{favoredGenres}`, { userId });
         const favoredGenres = new Set(userDoc[0]?.favoredGenres || []);
@@ -94,11 +99,12 @@ export default function Genre() {
                         {genres?.map((genre, idx) => (
                             genre.name !== null ? (
                                 <li key={idx} className="genre-item">
+                                    
                                     <Link to={`/movies_by_genre?genre=${genre.name}`}>
-                                        {genre.name}
+                                        {genre.name} ({genre.count})
                                     </Link>
                                     <button
-                                        className={genre.isFavorite ? 'add-btn' : 'remove-btn'}
+                                        className={genre.isFavorite ? 'remove-btn' : 'add-btn'}
                                         onClick={() => toggleFavorite(genre.name)}
                                     >
                                         <FaStar /> {genre.isFavorite ? 'Remove from favorite' : 'Add to favorite'}
