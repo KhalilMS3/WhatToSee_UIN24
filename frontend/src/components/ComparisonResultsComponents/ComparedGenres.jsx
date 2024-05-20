@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchSameGenres } from '../../sanity/services/genreServices';
-import { useUser } from '../hooks/UserContext';
+import { fetchSameGenres } from '../../../sanity/services/genreServices';
+import { useUser } from '../../hooks/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function ComparedGenres({friend}) {

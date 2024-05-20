@@ -3,9 +3,10 @@ import { useUser } from '../hooks/UserContext'; // Importer useUser-hooken
 import { Link, useLocation } from 'react-router-dom';
 import { FaSadTear } from "react-icons/fa";
 
-import {SameFavoredMovies, SameWishlistedMovies} from './ComparedMovies';
-import ComparedGenres from './ComparedGenres';
-import FavoritesWishlistComparison from './FavoritesWishlistComparison';
+import ComparedGenres from './ComparisonResultsComponents/ComparedGenres';
+import FavoritesWishlistComparison from './ComparisonResultsComponents/FavoritesWishlistComparison';
+import SameFavoredMovies from './ComparisonResultsComponents/SameFavoredMovies';
+import SameWishlistedMovies from './ComparisonResultsComponents/SameWishlistedMovies';
 
 export default function Dashboard() {
   const { loggedInUser } = useUser();
