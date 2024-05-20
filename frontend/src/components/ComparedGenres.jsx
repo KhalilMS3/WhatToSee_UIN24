@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSameGenres } from '../../sanity/services/genreServices';
 import { useUser } from '../hooks/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ComparedGenres() {
    const { loggedInUser, friend } = useUser();
@@ -49,9 +49,11 @@ export default function ComparedGenres() {
          <h3>Utforsk:</h3>
          <p>Sjekk hvilke filmer som er tilgjengelige innenfor sjangrene du og {friend} begge liker.</p>
          {sameGenresComparison.map((genre, idx) => (
-            <li key={idx} onClick={() => handleGenreClick(genre)}>
+            <li key={idx}>
+            <Link to={`/movies_by_genre?genre=${genre}`}>
                {genre}
-            </li>
+            </Link>
+         </li>
          ))}
       </section>
    );
