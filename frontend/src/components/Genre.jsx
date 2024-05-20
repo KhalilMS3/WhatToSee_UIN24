@@ -98,7 +98,7 @@ export default function Genre() {
                                         {genre.name}
                                     </Link>
                                     <button
-                                        className={genre.isFavorite ? 'remove-btn' : 'add-btn'}
+                                        className={genre.isFavorite ? 'add-btn' : 'remove-btn'}
                                         onClick={() => toggleFavorite(genre.name)}
                                     >
                                         <FaStar /> {genre.isFavorite ? 'Remove from favorite' : 'Add to favorite'}

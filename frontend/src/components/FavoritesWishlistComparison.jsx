@@ -10,7 +10,7 @@ export default function FavoritesWishlistComparison() {
    const [loggedInUserWlMovies, setLoggedInUserWlMovies] = useState([]);
    const [friendFavMovies, setFriendFavMovies] = useState([]);
    const [friendWlMovies, setFriendWlMovies] = useState([]);
-   const [FavoredAndWishlistComparison, setFavoredAndWishlistComparison] = useState([]);
+   const [favoredAndWishlistComparison, setFavoredAndWishlistComparison] = useState([]);
    const [wishlistAndFavoredComparison, setWishlistAndFavoredComparison] = useState([]);
    const [comparedMoviesList, setComparedMoviesList] = useState([])
 
@@ -56,7 +56,8 @@ export default function FavoritesWishlistComparison() {
    return (
      <section className="fav-and-wishlist-compare-sec">
          <h5>Ønskelister og favoritter</h5>
-         <p>Dere har filmer som er på ønskelisten til en og favorittlisten til den andre! Perfekt anledning til å introdusere hverandre for nye filmopplevelser!</p>
+         <p>Dere har filmer som er på ønskelisten til en og favorittlisten til den andre!
+         Perfekt anledning til å introdusere hverandre for nye filmopplevelser!</p>
          <section className="movie-cards-section">
             {
                comparedMoviesList?.map((movie, idx) => (

@@ -1,11 +1,10 @@
 .genre-list{
    display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-   gap: 1rem;
+   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+   gap: 2rem;
    list-style: none;
    padding: 0 20px;
       .genre-item{
-         
          display: flex;
          justify-content: space-between;
          align-items: baseline;
@@ -14,6 +13,7 @@
          font-weight: $bold-500;
          border-bottom: 1px dashed $primary-color;
          padding-bottom: 10px;
+
          button{
             cursor: pointer;
             padding: 10px 20px;
