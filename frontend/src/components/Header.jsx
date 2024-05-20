@@ -12,6 +12,7 @@ export default function Header() {
 
    const handleLogOut = () => {
       localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('userId');
       setLoggedInUser(null);
       setLoggedIn(false);
       navigate("/");
@@ -22,7 +23,7 @@ export default function Header() {
          <nav>
             <h1>
                <Link to={"/home"}>
-                  What To Seee?
+                  What To See?
                </Link>
             </h1>
             {loggedIn && (
@@ -38,7 +39,8 @@ export default function Header() {
                      </Link>
                   </li>
                   <li className="menuItem">
-                     <FaUserCircle /> {loggedInUser} <button onClick={handleLogOut}>Logg ut</button>
+                     <FaUserCircle /> {loggedInUser}
+                     <button onClick={handleLogOut}>Logg ut</button>
                   </li>
                </ul>
             )}

@@ -9,6 +9,7 @@ import Home from './components/Home';
 import { Routes, Route } from 'react-router-dom';
 import { UserProvider } from './hooks/UserContext';
 import Genre from './components/Genre';
+import MoviesByGenre from './components/MoviesByGenre';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/movies_by_genre" element={<MoviesByGenre />} />
           <Route path="/genre" element={<Genre />} />
         </Routes>
       </Layout>

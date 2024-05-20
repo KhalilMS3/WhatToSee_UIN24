@@ -3,6 +3,8 @@
 @import 'designelements';
 @import 'moviecard';
 @import '403error';
+@import 'genres';
+@import 'responsiv';
 
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
@@ -15,14 +17,6 @@ $font: 'Rubik', sans-serif;
 $bold-500: 500;
 $bold-700: 700;
 $max-width: 1200px;
-
-/*FIXED TEXT STYLES*/
-h2, h3, h4, h5{
-   padding: 10px 20px;
-   color: $primary-color;
-}
-h2 {font-size: 2.5rem;}
-h3, h4, h5 {font-size: 2rem;}
 
 
 
@@ -38,8 +32,9 @@ footer{
    text-align: center;
    margin-top: 2rem;
    p{
-      color: $primary-color;
-      font-weight: $bold-500;
+         padding: 0px 20px;
+         font-weight: $bold-500;
+         color: $primary-color;
    }
 }
 

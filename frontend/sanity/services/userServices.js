@@ -9,6 +9,17 @@ export async function fetchAllUsers() {
         
         return data;
     } catch (error) {
-        console.error('Error could not fetch:', error);
+        console.error('Could not fetch all users:', error);
+    }
+}
+export async function fetchUsersAsFriends(loggedInUser) {
+    try {
+        const data = await client.fetch(`*[_type == "users" && username != $loggedInUser]{
+            _id,
+            username
+        }`,{loggedInUser});
+        return data
+    } catch (error) {
+        console.error("Could not fetch none logged in user:", error)
     }
 }

@@ -6,20 +6,46 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [friendsList, setFriendsList] = useState([]);
+  const [friend, setFriend] = useState("");
+  const [friendId, setFriendId] = useState("");
 
   const getAllUsers = async () => {
-    const data = await fetchAllUsers()
+    const data = await fetchAllUsers();
     setUser(data);
   };
 
   useEffect(() => {
     getAllUsers();
+    const storedUser = localStorage.getItem('loggedInUser');
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUser && storedUserId) {
+      setLoggedInUser(storedUser);
+      setUserId(storedUserId);
+      setLoggedIn(true);
+    }
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser, loggedInUser, setLoggedInUser }}>
+    <UserContext.Provider value={{
+      loggedIn,
+      setLoggedIn,
+      user,
+      setUser,
+      loggedInUser,
+      setLoggedInUser,
+      userId,
+      setUserId,
+      friendsList,
+      setFriendsList,
+      friend,
+      setFriend,
+      friendId,
+      setFriendId
+    }}>
       {children}
     </UserContext.Provider>
   );

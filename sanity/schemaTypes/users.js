@@ -8,5 +8,23 @@ export const users = {
       name: 'username',
       type: 'string',
     },
+    {
+      title: 'Favoritt filmer',
+      name: 'favoredMovies',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'movies'}]}],
+    },
+    {
+      title: 'Ønskeliste av filmer',
+      name: 'wishlistedMovies',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'movies'}]}],
+    },
+    {
+      title: 'Favoritt sjangere',
+      name: 'favoredGenres',
+      type: 'array',
+      of: [{ type: 'string' }],
+    },
   ],
 }
