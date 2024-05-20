@@ -28,7 +28,11 @@ main{
    }
    
 }
-
+.movie-cards-section{
+   display: flex;
+   gap: 1;
+   flex-wrap: wrap;
+}
 .friends-section, .genre-section{
       padding: 0px 10px;
       margin: 10px 20px;
@@ -46,6 +50,16 @@ main{
       a{
          font-size: 1.5rem;
       }
+      button{
+         cursor: pointer;
+         width: 20%;
+         border: none;
+         background-color: transparent;
+         text-decoration: underline;
+         text-align: left;
+         font-size: 1.7rem;
+         font-family: $font;
+      }
 
 }
 .catchUp-list, .GoSafe-list{
@@ -57,6 +71,10 @@ main{
       margin-top: 0;
       
    }
+}
+
+.genre-section{
+   height: 20rem;
 }
 
 .fav-and-wishlist-compare-sec{
