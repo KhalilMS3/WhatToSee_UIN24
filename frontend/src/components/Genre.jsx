@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../hooks/UserContext'; 
+import { useUser } from '../hooks/UserContext';
 import { writeClient } from '../../sanity/client';
+import { Link } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
-
-//apikey: d2ca980ddcmsh43b9d3e642be0a8p1d08c1jsne846de12bbc5
 
 export default function Genre() {
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { userId } = useUser();
-    
 
     useEffect(() => {
         fetchGenres();
@@ -96,7 +94,9 @@ export default function Genre() {
                         {genres?.map((genre, idx) => (
                             genre.name !== null ? (
                                 <li key={idx} className="genre-item">
-                                    {genre.name}
+                                    <Link to={`/movies_by_genre?genre=${genre.name}`}>
+                                        {genre.name}
+                                    </Link>
                                     <button
                                         className={genre.isFavorite ? 'remove-btn' : 'add-btn'}
                                         onClick={() => toggleFavorite(genre.name)}
