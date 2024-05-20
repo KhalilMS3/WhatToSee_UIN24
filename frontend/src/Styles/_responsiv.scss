@@ -1,0 +1,44 @@
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+   h2,h3,h4,h5,p,a,button {
+         padding: 10px 20px;
+         color: $primary-color;
+      }
+   h2,h5 {
+         font-size: 1rem ;
+      }
+   
+   h3,h4 {
+         font-size: 1rem;
+      }
+      
+      p,a,button {
+         padding: 0px 20px;
+         font-weight: $bold-500;
+      }
+
+   .movie-card {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      padding: 15px 20px;
+      margin: 10px;
+      background-color: $secondary-color;
+
+      img {
+         width: 100%;
+         object-fit: contain;
+      }
+
+      a {
+         padding: .6rem 0;
+         color: $light-color;
+         font-size: 1rem;
+         font-weight: $bold-500;
+      }
+   }
+
+   h2{
+      font-size: .5rem;
+      color: aqua;
+   }
+}

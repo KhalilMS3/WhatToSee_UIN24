@@ -2,6 +2,8 @@ main{
    h2 {
          display: flex;
          align-items: center;
+         padding: 10px 20px;
+         color: $primary-color;
          svg {
             margin-left: 1rem;
          }
@@ -22,12 +24,14 @@ main{
             border-left: 5px dashed $primary-color;
          }
       }
+      // section
    .movie-cards-section{
       display: flex;
       flex-wrap: wrap;
    }
    
 }
+// div
 .movie-cards-section{
    display: flex;
    gap: 1;
@@ -42,13 +46,22 @@ main{
       width: 42.2rem;
       height: 15rem;
       h3{
+         font-size: 2rem;
          margin-bottom: 0;
+         padding: 10px 20px;
+         color: $primary-color;
       }
       p{
          margin-top: 0;
+         padding: 0 20px;
+         color: $primary-color;
+         font-weight: $bold-500;
       }
       a{
          font-size: 1.5rem;
+         padding: 0 20px;
+         color: $primary-color;
+         font-weight: $bold-500;
       }
       button{
          cursor: pointer;
@@ -59,16 +72,24 @@ main{
          text-align: left;
          font-size: 1.7rem;
          font-family: $font;
+         color: $primary-color;
+         padding: 0px 20px;
+         font-weight: $bold-500;
       }
 
 }
 .catchUp-list, .GoSafe-list{
    h4{
       margin: 0;
+      padding: 10px 20px;
+      color: $primary-color;
+      font-size: 2rem;
    }
    p{
       padding: 0 20px;
       margin-top: 0;
+      color: $primary-color;
+      font-weight: $bold-500;
       
    }
 }
@@ -77,10 +98,27 @@ main{
    height: 20rem;
 }
 
+.favorite-list, .wish-list{
+   h4{
+      padding: 10px 20px;
+      color: $primary-color;
+      font-size: 2rem;
+   }
+}
+
+.movies-by-genre{
+   h2{
+   font-size: 2.5rem;
+   padding: 10px 20px;
+   color: $primary-color;
+   }
+}
 .fav-and-wishlist-compare-sec{
    h5{
       font-size: 2.5rem;
       margin-bottom: 0;
+      padding: 10px 20px;
+      color: $primary-color;
    }
    p{
       padding: 10px 20px;
