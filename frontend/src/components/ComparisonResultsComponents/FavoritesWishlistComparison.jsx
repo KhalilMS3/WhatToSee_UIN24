@@ -29,13 +29,21 @@ export default function FavoritesWishlistComparison({friend}) {
       setFriendWlMovies(friendWlMovies)
 
       const favoredAndWishlistComparison = loggedInUserFavMovies.filter(
-         movie1 => friendWlMovies.some(movie2 => movie2.movietitle === movie1.movietitle)
-      )
+         movie1 => friendWlMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
+         .map(movie => ({
+            ...movie,
+            user: loggedInUser, list: "Favoritt",
+            comparedWith: friend, comparedList: "Ønskeliste"
+         }))
       setFavoredAndWishlistComparison(favoredAndWishlistComparison)
 
-       const wishlistAndFavoredComparison = loggedInUserWlMovies.filter(
-         movie1 => friendFavMovies.some(movie2 => movie2.movietitle === movie1.movietitle)
-      )
+      const wishlistAndFavoredComparison = loggedInUserWlMovies.filter(
+         movie1 => friendFavMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
+         .map(movie => ({
+            ...movie,
+            user: friend, list: "Favoritt",
+            comparedWith: loggedInUser, comparedList: "Ønskeliste"
+         }))
       setWishlistAndFavoredComparison(wishlistAndFavoredComparison)
 
       const comparedMoviesList = [...favoredAndWishlistComparison, ...wishlistAndFavoredComparison]
@@ -54,22 +62,22 @@ export default function FavoritesWishlistComparison({friend}) {
    }, [loggedInUser])
 
    return (
-     <section className="fav-and-wishlist-compare-sec">
+   <section className="fav-and-wishlist-compare-sec">
          <h5>Ønskelister og favoritter</h5>
          <p>Dere har filmer som er på ønskelisten til en og favorittlisten til den andre!
          Perfekt anledning til å introdusere hverandre for nye filmopplevelser!</p>
          <section className="movie-cards-section">
-            {
-               comparedMoviesList?.map((movie, idx) => (
-                  < MovieCard
-                  key={idx}
-                  movietitle={movie.movietitle}
-                  poster={movie.poster}
-                  IMDBid={movie.IMDBid}
-                  genres={movie.genres}
-                  />
-               ))
-            }
+               {comparedMoviesList?.map((movie, idx) => (
+            <MovieCard
+               movietitle={movie.movietitle}
+               poster={movie.poster}
+               IMDBid={movie.IMDBid}
+               user={movie.user}
+               userList={movie.list}
+               comparedWith={movie.comparedWith}
+               comparedList={movie.comparedList}
+               />
+         ))}
          </section>
       </section>
       
