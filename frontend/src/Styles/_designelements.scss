@@ -10,6 +10,7 @@ main{
       }
 }
 
+// Home page
 .movieLists-section{
    display: flex;
    gap: 1rem;
@@ -30,11 +31,7 @@ main{
       }
    }
    
-// section
-.movie-cards-section {
-   display: flex;
-   flex-wrap: wrap;
-}
+
 .friends-section, .genre-section{
       padding: 0px 10px;
       margin: 10px 20px;
@@ -76,21 +73,6 @@ main{
       }
 
 }
-.catchUp-list, .GoSafe-list{
-   h4{
-      margin: 0;
-      padding: 10px 20px;
-      color: $primary-color;
-      font-size: 2rem;
-   }
-   p{
-      padding: 0 20px;
-      margin-top: 0;
-      color: $primary-color;
-      font-weight: $bold-500;
-      
-   }
-}
 
 .genre-section{
    height: 20rem;
@@ -104,11 +86,29 @@ main{
    }
 }
 
+// movies by genre page
 .movies-by-genre{
    h2{
-   font-size: 2.5rem;
-   padding: 10px 20px;
-   color: $primary-color;
+      font-size: 2.5rem;
+      padding: 10px 20px;
+      color: $primary-color;
+   }
+}
+
+// dashboard
+.catchUp-list, .GoSafe-list{
+   h4{
+      margin: 0;
+      padding: 10px 20px;
+      color: $primary-color;
+      font-size: 2rem;
+   }
+   p{
+      padding: 0 20px;
+      margin-top: 0;
+      color: $primary-color;
+      font-weight: $bold-500;
+      
    }
 }
 .fav-and-wishlist-compare-sec{
@@ -129,18 +129,20 @@ main{
       display: flex;
       flex-wrap: wrap;
       gap: 1;
-
+      
       .movie-card{
-            margin-bottom: 10px;
-            .list-info{
+         margin-bottom: 10px;
+         .list-info{
                display: block;
                color: $light-color;
+               font-weight: normal;
                font-size: .9rem;
                padding:0;
                margin: 0;
-
+               
             }
          }
       }
    }
-
+   
+   

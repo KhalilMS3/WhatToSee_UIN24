@@ -32,8 +32,8 @@ export default function FavoritesWishlistComparison({friend}) {
          movie1 => friendWlMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
          .map(movie => ({
             ...movie,
-            user: loggedInUser, list: "Favored",
-            comparedWith: friend, comparedList: "Wishlist"
+            user: loggedInUser, list: "Favoritt",
+            comparedWith: friend, comparedList: "Ønskeliste"
          }))
       setFavoredAndWishlistComparison(favoredAndWishlistComparison)
 
@@ -41,8 +41,8 @@ export default function FavoritesWishlistComparison({friend}) {
          movie1 => friendFavMovies.some(movie2 => movie2.movietitle === movie1.movietitle))
          .map(movie => ({
             ...movie,
-            user: friend, list: "Favored",
-            comparedWith: loggedInUser, comparedList: "Wishlist"
+            user: friend, list: "Favoritt",
+            comparedWith: loggedInUser, comparedList: "Ønskeliste"
          }))
       setWishlistAndFavoredComparison(wishlistAndFavoredComparison)
 
