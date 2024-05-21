@@ -13,7 +13,6 @@ export default function Dashboard() {
   const location = useLocation();
   const { friend } = location.state || []
   
-  console.log(friend)
   if (loggedInUser) {
     return (
       <>
